@@ -1,0 +1,24 @@
+
+services:
+  postgresdb:
+    image: postgres:latest
+    container_name: postgreswarehouse
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: warehouse
+      POSTGRES_USER: warehousename
+      POSTGRES_PASSWORD: warehousepass
+
+  spring-app:
+    build: .
+    container_name: spring-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgresdb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/warehouse
+      SPRING_DATASOURCE_USERNAME: warehousename
+      SPRING_DATASOURCE_PASSWORD: warehousepass
