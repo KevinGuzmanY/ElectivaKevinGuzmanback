@@ -1,14 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
-
-    tools {
-        maven "apache-maven-3.8.1"
-    }
+    agent any
 
     stages {
         stage('Clonar Repositorio') {
