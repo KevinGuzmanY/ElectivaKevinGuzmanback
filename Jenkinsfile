@@ -10,10 +10,11 @@ pipeline {
 
         stage('Construir') {
             steps {
-                // Utilizar Maven para construir el proyecto
-                sh 'docker-compose down'
-                sh 'docker-compose build'
-                sh 'docker-compose up -d'
+                dir('contabilidad-back') {
+                    sh 'docker-compose down'
+                    sh 'docker-compose build'
+                    sh 'docker-compose up -d'
+                }
             }
         }
 
