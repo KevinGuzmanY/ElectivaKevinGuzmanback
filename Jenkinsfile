@@ -34,6 +34,7 @@ pipeline {
                 // Desplegar la aplicación en el servidor de aplicación (por ejemplo, Tomcat)
                 // Aquí debes incluir los comandos necesarios para el despliegue, por ejemplo:
                 // sh 'scp target/nombre_de_tu_aplicacion.jar usuario@servidor:/ruta/donde/desplegar'
+                echo 'El pipeline se ejecutó correctamente.'
             }
         }
     }
