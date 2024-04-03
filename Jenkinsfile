@@ -11,7 +11,9 @@ pipeline {
         stage('Construir') {
             steps {
                 // Utilizar Maven para construir el proyecto
-                sh 'mvn clean package'
+                sh 'docker-compose down'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
             }
         }
 
