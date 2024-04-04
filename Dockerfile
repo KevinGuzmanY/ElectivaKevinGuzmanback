@@ -8,10 +8,12 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the packaged Spring Boot application JAR file into the container
-COPY target/backTienda-0.0.1-SNAPSHOT.jar /app/backTienda-0.0.1-SNAPSHOT.jar
+COPY target/my-application.jar /app
 
 # Expose the port that your Spring Boot application uses (default is 8080)
 EXPOSE 5000
 
-# Command to run the Spring Boot application when the container starts
-CMD ["java", "-jar", "backTienda-0.0.1-SNAPSHOT.jar"]
+# Copiar el archivo JAR de la aplicación al contenedor
+
+# Comando para ejecutar la aplicación Spring Boot
+CMD ["java", "-jar", "my-application.jar"]
