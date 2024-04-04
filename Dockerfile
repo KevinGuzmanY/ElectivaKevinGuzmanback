@@ -13,7 +13,5 @@ COPY target/my-application.jar /app
 # Expose the port that your Spring Boot application uses (default is 8080)
 EXPOSE 5000
 
-# Copiar el archivo JAR de la aplicación al contenedor
-
 # Comando para ejecutar la aplicación Spring Boot
 CMD ["java", "-jar", "my-application.jar"]
