@@ -10,11 +10,9 @@ pipeline {
 
         stage('Construir') {
             steps {
-                dir('contabilidad-back') {
-                    sh 'docker-compose down'
-                    sh 'docker-compose build'
-                    sh 'docker-compose up -d'
-                }
+                sh 'docker-compose down'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
             }
         }
 
