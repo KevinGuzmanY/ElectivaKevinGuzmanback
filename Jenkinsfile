@@ -4,9 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'mvn clean package' // Construir el proyecto Spring Boot
+                sh 'docker-compose up -d' // Construir el proyecto Spring Boot
             }
         }
-
     }
 }
