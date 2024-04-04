@@ -4,11 +4,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'docker-compose down'
-                bat 'docker stop postgreswarehouse' // Detener el contenedor existente
-                bat 'docker rm postgreswarehouse'
-                bat 'docker stop spring-app' // Detener el contenedor existente
-                bat 'docker rm spring-app'
+                bat 'docker-compose down || exit 0'
+                bat 'docker stop postgreswarehouse || exit 0' // Detener el contenedor existente
+                bat 'docker rm postgreswarehouse || exit 0'
+                bat 'docker stop spring-app || exit 0' // Detener el contenedor existente
+                bat 'docker rm spring-app || exit 0'
                 bat 'mvn clean package'
                 bat 'docker-compose up -d' // Construir el proyecto Spring Boot
             }
