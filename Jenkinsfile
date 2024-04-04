@@ -2,15 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clonar Repositorio') {
-            steps {
-                git 'https://github.com/KevinGuzmanY/contabilidad-back'
-            }
-        }
 
         stage('Construir') {
             steps {
-                sh 'docker-compose down'
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
             }
