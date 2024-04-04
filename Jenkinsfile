@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker-compose up -d' // Construir el proyecto Spring Boot
+                bat 'docker-compose up -d' // Construir el proyecto Spring Boot
             }
         }
     }
