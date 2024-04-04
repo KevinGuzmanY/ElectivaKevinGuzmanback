@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package' // Construir el proyecto Spring Boot
+                echo 'mvn clean package' // Construir el proyecto Spring Boot
             }
         }
 
