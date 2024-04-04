@@ -14,4 +14,4 @@ COPY target/backTienda-0.0.1-SNAPSHOT.jar /app
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación Spring Boot
-CMD ["java", "-jar", "my-application.jar"]
+CMD ["java", "-jar", "backTienda-0.0.1-SNAPSHOT.jar"]
