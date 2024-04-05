@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Build') {
             steps {
@@ -9,8 +9,7 @@ pipeline {
                 bat 'docker rm postgreswarehouse || exit 0'
                 bat 'docker stop spring-app || exit 0' // Detener el contenedor existente
                 bat 'docker rm spring-app || exit 0'
-                bat 'mvn clean package'
-                bat 'docker-compose up -d' // Construir el proyecto Spring Boot
+                bat 'docker compose up -d' // Construir el proyecto Spring Boot
             }
         }
     }
