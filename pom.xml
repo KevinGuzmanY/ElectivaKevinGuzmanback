@@ -16,9 +16,6 @@
     <properties>
         <java.version>11</java.version>
     </properties>
-    <build>
-        <finalName>backendsft3</finalName>
-    </build>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,6 +50,7 @@
 
 
     <build>
+        <finalName>backendsft3</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
