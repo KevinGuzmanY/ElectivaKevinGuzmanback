@@ -6,13 +6,16 @@ import com.kevinproject.backtienda.model.producto;
 import com.kevinproject.backtienda.service.productoServ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -23,18 +26,15 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
 @WebMvcTest(controller.class)
-@AutoConfigureMockMvc
 class controllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    private productoServ productoServMock;
-
-    @InjectMocks
-    private controller controllerUnderTest;
+    @MockBean
+    private productoServ productoServ;
 
     @BeforeEach
     void setUp() {
@@ -44,7 +44,7 @@ class controllerTest {
     @Test
     void productoList() throws Exception {
         List<producto> productList = Arrays.asList(new producto(), new producto());
-        when(productoServMock.listarTodo()).thenReturn(productList);
+        when(productoServ.listarTodo()).thenReturn(productList);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/tienda/tabla"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -53,8 +53,8 @@ class controllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1]").exists());
 
-        verify(productoServMock, times(1)).listarTodo();
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).listarTodo();
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
@@ -63,17 +63,17 @@ class controllerTest {
         product.setId(1);
         product.setNombre("Test Product");
 
-        when(productoServMock.guardar(any(producto.class))).thenReturn(product);
+        when(productoServ.guardar(any(producto.class))).thenReturn(product);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/tienda/guardar")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(product)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test Product"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("Test Product"));
 
-        verify(productoServMock, times(1)).guardar(any(producto.class));
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).guardar(any(producto.class));
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
@@ -82,15 +82,15 @@ class controllerTest {
         product.setId(1);
         product.setNombre("Test Product");
 
-        when(productoServMock.listarPorId(1)).thenReturn(Optional.of(product));
+        when(productoServ.listarPorId(1)).thenReturn(Optional.of(product));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/tienda/getbyid/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test Product"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("Test Product"));
 
-        verify(productoServMock, times(1)).listarPorId(1);
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).listarPorId(1);
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
@@ -99,17 +99,17 @@ class controllerTest {
         product.setId(1);
         product.setNombre("Test Product");
 
-        when(productoServMock.edit(any(producto.class))).thenReturn(product);
+        when(productoServ.edit(any(producto.class))).thenReturn(product);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/tienda/updateProduct")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(product)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test Product"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("Test Product"));
 
-        verify(productoServMock, times(1)).edit(any(producto.class));
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).edit(any(producto.class));
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
@@ -117,20 +117,20 @@ class controllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/tienda/delete/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        verify(productoServMock, times(1)).borrarPorId(1);
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).borrarPorId(1);
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
     void balancetotal() throws Exception {
-        when(productoServMock.balanceTienda()).thenReturn(100);
+        when(productoServ.balanceTienda()).thenReturn(100);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/tienda/balancetotal"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("100"));
 
-        verify(productoServMock, times(1)).balanceTienda();
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).balanceTienda();
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
@@ -143,20 +143,20 @@ class controllerTest {
                         .content(asJsonString(product)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        verify(productoServMock, times(1)).abastecerProducto(1, 10, 20.0);
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).abastecerProducto(1, 10, 20.0);
+        verifyNoMoreInteractions(productoServ);
     }
 
     @Test
     void getStock() throws Exception {
-        when(productoServMock.stock()).thenReturn(50);
+        when(productoServ.stock()).thenReturn(50);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/tienda/stock"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("50"));
 
-        verify(productoServMock, times(1)).stock();
-        verifyNoMoreInteractions(productoServMock);
+        verify(productoServ, times(1)).stock();
+        verifyNoMoreInteractions(productoServ);
     }
 
     private String asJsonString(final Object obj) {
