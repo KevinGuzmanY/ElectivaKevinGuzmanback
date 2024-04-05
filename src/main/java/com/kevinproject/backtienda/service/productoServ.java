@@ -3,6 +3,7 @@
 package com.kevinproject.backtienda.service;
 
 import com.kevinproject.backtienda.model.producto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

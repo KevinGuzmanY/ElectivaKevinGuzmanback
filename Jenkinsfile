@@ -9,6 +9,14 @@ pipeline {
             }
         }
 
+        stage('Running Unit Tests') {
+            steps {
+                script {
+                    bat 'mvn test'
+                }
+            }
+        }
+
         stage('Cleanup Containers') {
             steps {
                 script {
