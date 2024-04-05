@@ -8,7 +8,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the packaged Spring Boot application JAR file into the container
-COPY target/backendsft3 /app
+COPY target/backendsft3.jar /app
 
 # Expose the port that your Spring Boot application uses (default is 8080)
 EXPOSE 5000
