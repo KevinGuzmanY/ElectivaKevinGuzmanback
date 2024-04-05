@@ -10,9 +10,6 @@ pipeline {
                 bat 'docker stop spring-app || exit 0' // Detener el contenedor existente
                 bat 'docker rm spring-app || exit 0'
                 bat 'mvn clean package'
-                 script {
-                            docker.build('backendsft3') // Construir imagen Docker
-                        }
                 bat 'docker-compose up -d' // Construir el proyecto Spring Boot
             }
         }
