@@ -11,7 +11,6 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean package'
                 bat 'docker compose down || exit 0'
                 bat 'docker stop postgreswarehouse || exit 0' // Detener el contenedor existente
                 bat 'docker rm postgreswarehouse || exit 0'
