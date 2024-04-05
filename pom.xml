@@ -51,7 +51,6 @@
 
     <build>
         <finalName>backendsft3</finalName>
-        <directory>C:\Users\kevin\Downloads\Contabilidad-Tienda-Back-springboot-master (1)\Contabilidad-Tienda-Back-springboot-master\target</directory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
