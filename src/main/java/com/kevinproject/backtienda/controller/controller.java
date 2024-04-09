@@ -48,8 +48,8 @@ public class controller {
 
     @PutMapping(path = "/supply/{unidades}/value{valorunidad}")
     public void supplyProduct(@PathVariable(name = "unidades")int unds,@PathVariable(name = "valorunidad")double valorU,@RequestBody producto producto){
-        int ids = producto.getId();
-        productoServ.abastecerProducto(ids,unds,valorU);
+        int id = producto.getId();
+        productoServ.abastecerProducto(id,unds,valorU);
     }
 
     @GetMapping(path = "/stock")
