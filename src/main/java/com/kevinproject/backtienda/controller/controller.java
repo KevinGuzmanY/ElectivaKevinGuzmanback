@@ -39,7 +39,6 @@ public class controller {
     @DeleteMapping(path = "/delete/{id}")
     public void deletebyid(@PathVariable(name = "id",required = true)int id){
         productoServ.borrarPorId(id);
-        
     }
 
     @GetMapping(path = "/balancetotal")
@@ -49,8 +48,8 @@ public class controller {
 
     @PutMapping(path = "/supply/{unidades}/value{valorunidad}")
     public void supplyProduct(@PathVariable(name = "unidades")int unds,@PathVariable(name = "valorunidad")double valorU,@RequestBody producto producto){
-        int id = producto.getId();
-        productoServ.abastecerProducto(id,unds,valorU);
+        int ids = producto.getId();
+        productoServ.abastecerProducto(ids,unds,valorU);
     }
 
     @GetMapping(path = "/stock")
